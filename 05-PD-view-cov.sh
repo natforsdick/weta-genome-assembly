@@ -1,5 +1,15 @@
 #!/bin/bash -e
 
+#SBATCH --job-name=05-PD-view-cov
+#SBATCH --output=%x.%j.out
+#SBATCH --error=%x.%j.err
+#SBATCH --time=01:00:00
+#SBATCH --mem=18G
+#SBATCH --ntasks=1
+#SBATCH --profile=task 
+#SBATCH --account=ga03048
+#SBATCH --cpus-per-task=2
+
 # Purge_dups pipeline
 # Created by Sarah Bailey, UoA
 # Modified by Nat Forsdick, 2021-08-24
@@ -9,8 +19,8 @@
 ##########
 # PARAMS
 PURGE_DUPS=/nesi/nobackup/ga03186/purge_dups/scripts/
-OUTDIR=/nesi/nobackup/ga03048/assemblies/hifiasm/purge_dups/
-PRE=longest-contig.weta-hic-hifiasm # PREFIX
+OUTDIR=/nesi/nobackup/ga03048/assemblies/hifiasm/purge-dups/
+PRE=weta-hic-hifiasm- # PREFIX
 PRI=p_ctg
 ALT=a_ctg
 R1=01- # Designate cutoffs round - either default (01) or modified (02) and whether Primary or Alternate assembly
@@ -29,9 +39,12 @@ cd ${OUTDIR}
 if [ "$1" == "PRI" ]; then
  
   if [ "$2" == "R1" ]; then
-  
+
+	if [ -f purged.fa ]; then  
     mv purged.fa ${R1}${PRE}${PRI}-purged.fa
     mv hap.fa ${R1}${PRE}${PRI}-hap.fa
+	fi
+
     python3 ${PURGE_DUPS}hist_plot.py -c ${R1}${PRE}${PRI}-cutoffs ${R1}${PRE}${PRI}-PB.stat ${R1}${PRE}${PRI}-PB.cov.png
 
     # Run assemblathon stats
