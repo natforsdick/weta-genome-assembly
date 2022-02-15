@@ -8,7 +8,7 @@
 #SBATCH --ntasks=1
 #SBATCH --profile=task 
 #SBATCH --account=ga03048
-#SBATCH --cpus-per-task=8
+#SBATCH --cpus-per-task=2
 
 # Purge_dups pipeline
 # Created by Sarah Bailey, UoA
