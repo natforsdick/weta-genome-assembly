@@ -3,8 +3,8 @@
 #SBATCH --job-name=05-PD-view-cov
 #SBATCH --output=%x.%j.out
 #SBATCH --error=%x.%j.err
-#SBATCH --time=00:03:00
-#SBATCH --mem=22G
+#SBATCH --time=00:05:00
+#SBATCH --mem=28G
 #SBATCH --ntasks=1
 #SBATCH --profile=task 
 #SBATCH --account=ga03048
@@ -51,16 +51,21 @@ if [ "$1" == "PRI" ]; then
     $ASMSTATS ${R1}${PRE}${PRI}-purged.fa > ${R1}${PRE}${PRI}-purged.stats
 
   elif [ "$2" == "R2" ]; then
+        if [ -f purged.fa ]; then
     mv purged.fa ${R2}${PRE}${PRI}-purged.fa
     mv hap.fa ${R2}${PRE}${PRI}-hap.fa
+	fi
+
     python3 ${PURGE_DUPS}hist_plot.py -c ${R2}${PRE}${PRI}-cutoffs ${R1}${PRE}${PRI}-PB.stat ${R2}${PRE}${PRI}-PB.cov.png
 
     $ASMSTATS ${R2}${PRE}${PRI}-purged.fa > ${R2}${PRE}${PRI}-purged.stats
   fi
 
 elif [ "$1" == "ALT" ]; then
+        if [ -f purged.fa ]; then
   mv purged.fa ${R1}${PRE}${ALT}-purged.fa
   mv hap.fa ${R1}${PRE}${ALT}-hap.fa
+	fi
   if [ "$2" == "R1" ]; then
     python3 ${PURGE_DUPS}hist_plot.py -c ${R1}${PRE}${ALT}-cutoffs ${R1}${PRE}${ALT}-PB.stat ${R1}${PRE}${ALT}-PB.cov.png
 
@@ -68,8 +73,10 @@ elif [ "$1" == "ALT" ]; then
     $ASMSTATS ${R1}${PRE}${ALT}-purged.fa > ${R1}${PRE}${ALT}-purged.stats
 
   elif [ "$2" == "R2" ]; then
+        if [ -f purged.fa ]; then
     mv purged.fa ${R2}${PRE}${ALT}-purged.fa
     mv hap.fa ${R2}${PRE}${ALT}-hap.fa
+	fi
     python3 ${PURGE_DUPS}hist_plot.py -c ${R2}${PRE}${ALT}-cutoffs ${R1}${PRE}${ALT}-PB.stat ${R2}${PRE}${ALT}-PB.cov.png
 
     $ASMSTATS ${R2}${PRE}${ALT}-purged.fa > ${R2}${PRE}${ALT}-purged.stats
@@ -77,17 +84,20 @@ elif [ "$1" == "ALT" ]; then
 
 else
   if [ "$1" == "R1" ]; then
-
+        if [ -f purged.fa ]; then
     mv purged.fa ${R1}${PRE}purged.fa
     mv hap.fa ${R1}${PRE}hap.fa
+	fi
     python3 ${PURGE_DUPS}hist_plot.py -c ${R1}${PRE}-cutoffs ${R1}${PRE}-PB.stat ${R1}${PRE}-PB.cov.png
 
     # Run assemblathon stats
     $ASMSTATS ${R1}${PRE}-purged.fa > ${R1}${PRE}-purged.stats
 
   elif [ "$1" == "R2" ]; then
+        if [ -f purged.fa ]; then
     mv purged.fa ${R2}${PRE}-purged.fa
     mv hap.fa ${R2}${PRE}-hap.fa
+	fi
     python3 ${PURGE_DUPS}hist_plot.py -c ${R2}${PRE}-cutoffs ${R1}${PRE}-PB.stat ${R2}${PRE}-PB.cov.png
 
     $ASMSTATS ${R2}${PRE}-purged.fa > ${R2}${PRE}-purged.stats
