@@ -33,6 +33,7 @@ PRI=p_ctg
 ALT=a_ctg
 R1=01- # Designate cutoffs round - either default (01) or modified (02) and whether Primary or Alternate assembly
 R2=02-
+
 #########
 
 if [ ! -e $OUTDIR ]; then
@@ -46,7 +47,7 @@ if [ "$1" == "PRI" ]; then
   minimap2 -x map-hifi -t $SLURM_CPUS_PER_TASK ${INDIR}${PRE}.${PRI}.fa ${DATA}*.fastq.gz | gzip -c - > ${R1}${PRE}-${PRI}-mapped.paf.gz
  
 elif [ "$1" == "ALT" ]; then
-  minimap2 -x map-hifi -t $SLURM_CPUS_PER_TASK ${INDIR}${R1}${PRE}.${ALT}.hap-merged.fa ${DATA}*.fastq.gz | gzip -c - > ${R1}${PRE}-${ALT}-merged-mapped.paf.gz
+  minimap2 -x map-hifi -t $SLURM_CPUS_PER_TASK ${OUTDIR}${R2}${PRE}.${ALT}.hap-merged.fa ${DATA}*.fastq.gz | gzip -c - > ${R1}${PRE}-${ALT}-merged-mapped.paf.gz
 
 else
   minimap2 -x map-hifi -t $SLURM_CPUS_PER_TASK ${INDIR}${PRE}.fasta ${DATA}*.fastq.gz | gzip -c - > ${R1}${PRE}-mapped.paf.gz
