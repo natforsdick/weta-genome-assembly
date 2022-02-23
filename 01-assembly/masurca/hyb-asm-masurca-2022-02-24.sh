@@ -6,8 +6,8 @@
 #SBATCH --mem 4G
 #SBATCH --cpus-per-task 8
 #SBATCH --qos=debug
-#SBATCH --output hifiasm.%j.out
-#SBATCH --error hifiasm.%j.err
+#SBATCH --output %x.%j.out
+#SBATCH --error %x.%j.err
 #SBATCH --profile=task
 
 # Test script to run masurca pipeline for weta
