@@ -23,4 +23,4 @@ datadir=${analysisdir}/"00_rawdata"
 cd ${analysisdir}
 
 #execute
-masurca nf_config.txt
+masurca /nesi/project/ga03048/scripts/genome-assembly/01-assembly/masurca/nf_config.txt
