@@ -30,7 +30,7 @@
 # Modules
 module purge
 
-module load BWA/0.7.17-GCC-9.2.0 picard/2.21.8-Java-11.0.4 SAMtools/1.13-GCC-9.2.0
+module load BWA/0.7.17-GCC-9.2.0 picard/2.21.8-Java-11.0.4 SAMtools/1.13-GCC-9.2.0 samblaster/0.1.26-GCC-9.2.0
 
 
 HIC='Weta_HiC_raw_all_R' #'basename_of_fastq_files'
@@ -42,17 +42,17 @@ REF_DIR='/nesi/nobackup/ga03048/assemblies/hifiasm/01-assembly/'
 REF='/nesi/nobackup/ga03048/assemblies/hifiasm/01-assembly/weta-hic-hifiasm.p_ctg.fa' #'/path/to/reference_sequences/reference_sequences.fa'
 FAIDX='$REF.fai'
 PREFIX='weta-hic-hifiasm.p_ctg' #'bwa_index_name'
-RAW_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm-raw/01_mapped' #'/path/to/write/out/bams'
-FILT_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm-raw/02_filtered' #'/path/to/write/out/filtered/bams'
+RAW_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm-raw/01_mapped/' #'/path/to/write/out/bams'
+FILT_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm-raw/02_filtered/' #'/path/to/write/out/filtered/bams'
 FILTER='/nesi/project/ga03048/scripts/genome-assembly/04-hic-arima/filter_five_end.pl' #'/path/to/filter_five_end.pl'
 COMBINER='/nesi/project/ga03048/scripts/genome-assembly/04-hic-arima/two_read_bam_combiner.pl' #'/path/to/two_read_bam_combiner.pl'
 STATS='/nesi/project/ga03048/scripts/genome-assembly/04-hic-arima/get_stats.pl' #'/path/to/get_stats.pl'
 PICARD='/opt/nesi/mahuika/picard/2.21.8-Java-11.0.4/picard.jar'
-TMP_DIR='/nesi/nobackup/ga03048/tmp' #'/path/to/write/out/temporary/files'
-PAIR_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm-raw/03_paired' #'/path/to/write/out/paired/bams'
-REP_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm-raw/04_dedup' #'/path/to/where/you/want/deduplicated/files'
+TMP_DIR='/nesi/nobackup/ga03048/tmp/' #'/path/to/write/out/temporary/files'
+PAIR_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm-raw/03_paired/' #'/path/to/write/out/paired/bams'
+REP_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm-raw/04_dedup/' #'/path/to/where/you/want/deduplicated/files'
 REP_LABEL=$LABEL\_rep1
-MERGE_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm-raw/05_merged' #'/path/to/final/merged/alignments/from/any/biological/replicates'
+MERGE_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm-raw/05_merged/' #'/path/to/final/merged/alignments/from/any/biological/replicates'
 MAPQ_FILTER=10
 CPU=$SLURM_CPUS_PER_TASK
 
@@ -75,12 +75,11 @@ echo "Finished indexing $REF"
 fi
 
 echo "### Step 1.A: FASTQ to BAM (1st)"
-echo "bwa mem -t ${CPU} -5SP ${REF} ${IN_DIR}${HIC}1.fastq.gz | samtools view -@ $CPU -S -h -b -F 2316 > ${RAW_DIR}${HIC}1.bam"
-bwa mem -t ${CPU} -5SP ${REF} ${IN_DIR}${HIC}1.fastq.gz | samtools view -@ $CPU -S -h -b -F 2316 > ${RAW_DIR}${HIC}1.bam 
-echo "Finished step 1.A"
+echo "bwa mem -t $CPU -5SP $REF ${IN_DIR}${HIC}1.fastq.gz ${IN_DIR}${HIC}2.fastq.gz | samblaster |\
+ samtools view -@ $CPU -buSh -F 2316 - > ${RAW_DIR}${HIC}.bam"
 
-echo "### Step 1.B: FASTQ to BAM (2nd)"
-echo "bwa mem -t ${CPU} -5SP ${REF} ${IN_DIR}${HIC}2.fastq.gz | samtools view -@ $CPU -S -h -b -F 2316 > ${RAW_DIR}${HIC}2.bam"
-bwa mem -t ${CPU} -5SP ${REF} ${IN_DIR}${HIC}2.fastq.gz | samtools view -@ $CPU -S -h -b -F 2316 > ${RAW_DIR}${HIC}2.bam
-echo "Finished step 1.B"
+bwa mem -t $CPU -5SP $REF ${IN_DIR}${HIC}1.fastq.gz ${IN_DIR}${HIC}2.fastq.gz | samblaster |\
+ samtools view -@ $CPU -buSh -F 2316 - > ${RAW_DIR}${HIC}.bam
+
+echo "Finished step 1.A"
 
