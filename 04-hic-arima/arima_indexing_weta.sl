@@ -2,8 +2,8 @@
 #SBATCH --account=ga03048
 #SBATCH --job-name=index-map-raw-hifiasm # job name (shows up in the queue)
 #SBATCH --cpus-per-task=48
-#SBATCH --mem=36G
-#SBATCH --time=24:00:00 #Walltime (HH:MM:SS)
+#SBATCH --mem=56G
+#SBATCH --time=18:00:00 #Walltime (HH:MM:SS)
 #SBATCH --mail-type=FAIL
 #SBATCH --mail-user=forsdickn@landcareresearch.co.nz
 #SBATCH --output %x.%j.out # CHANGE number for new run
@@ -65,13 +65,14 @@ echo "### Step 0: Check output directories exist & create them as needed"
 [ -d $MERGE_DIR ] || mkdir -p $MERGE_DIR
 
 #echo "### Step 0: Index reference" # Run only once! Skip this step if you have already generated BWA index files
-if [ -f ${REF}.amb ]; then
-echo "${REF} index found"
-else
 cd $REF_DIR
-echo "Indexing ${REF}"
-bwa index -a bwtsw -p $PREFIX $REF
-echo "Finished indexing $REF"
+if [ -f ${REF}.amb ]; then
+	echo "${REF} index found"
+	else
+		cd $REF_DIR
+		echo "Indexing ${REF}"
+		bwa index -a bwtsw -p $PREFIX $REF
+		echo "Finished indexing $REF"
 fi
 
 echo "### Step 1.A: FASTQ to BAM (1st)"
