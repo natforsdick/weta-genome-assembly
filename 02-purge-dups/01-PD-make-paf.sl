@@ -4,11 +4,11 @@
 #SBATCH --output=%x.%j.out
 #SBATCH --error=%x.%j.err
 #SBATCH --time=08:00:00
-#SBATCH --mem=28G
+#SBATCH --mem=22G
 #SBATCH --ntasks=1
 #SBATCH --profile=task 
 #SBATCH --account=ga03048
-#SBATCH --cpus-per-task=40
+#SBATCH --cpus-per-task=62
 
 # Purge_dups pipeline
 # Created by Sarah Bailey, UoA
