@@ -15,7 +15,7 @@
 # Modified by Nat Forsdick, 2021-08-24
 
 # step 03: do a self-self alignment
-
+# Takes one argument: PRI or ALT
 #########
 # MODULES
 module purge
