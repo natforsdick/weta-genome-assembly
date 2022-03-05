@@ -1,9 +1,9 @@
 #!/bin/bash 
 #SBATCH --account=ga03048
-#SBATCH --job-name=index-map-raw-hifiasm # job name (shows up in the queue)
+#SBATCH --job-name=01-arima-indexing # job name (shows up in the queue)
 #SBATCH --cpus-per-task=48
 #SBATCH --mem=56G
-#SBATCH --time=18:00:00 #Walltime (HH:MM:SS)
+#SBATCH --time=15:00:00 #Walltime (HH:MM:SS)
 #SBATCH --mail-type=FAIL
 #SBATCH --mail-user=forsdickn@landcareresearch.co.nz
 #SBATCH --output %x.%j.out # CHANGE number for new run
@@ -17,26 +17,34 @@
 # https://github.com/ArimaGenomics/mapping_pipeline/ #
 ##############################################
 
-#Below find the commands used to map HiC data.
+# This is the ARIMA genomics pipeline, modified by Nat Forsdick for use with wētā data.
 
-#Replace the variables at the top with the correct paths for the locations of files/programs on your system.
+# Below find the commands used to map HiC data.
 
-#This bash script will map one paired end HiC dataset (read1 & read2 fastqs). Feel to modify and multiplex as you see fit to work with your volume of samples and system.
+# Replace the variables at the top with the correct paths for the locations of files/programs on your system.
+
+# This bash script will map one paired end HiC dataset (read1 & read2 fastqs). 
+
+# Modify and multiplex as you see fit to work with your volume of samples and system.
 
 ##########################################
 # Commands #
 ##########################################
 
-# Modules
+############
+# MODULES
+############
 module purge
-
 module load BWA/0.7.17-GCC-9.2.0 picard/2.21.8-Java-11.0.4 SAMtools/1.13-GCC-9.2.0 samblaster/0.1.26-GCC-9.2.0
+############
 
-
+############
+# PARAMS
+############
 HIC='Weta_HiC_raw_all_R' #'basename_of_fastq_files'
-LABEL='Weta_HiCmapped' #'overall_exp_name'
+LABEL='Weta-HiC-mapped' #'overall_exp_name'
 BWA='bwa' #'/software/bwa/bwa-0.7.12/bwa'
-SAMTOOLS='samtools' #'/software/samtools/samtools-1.3.1/samtools'
+SAMTOOLS='samtools' #'/software/samtools/samtools-1.3.1/samtools'q
 IN_DIR='/nesi/nobackup/ga03048/data/HiC/weta/' # '/path/to/gzipped/fastq/files'
 REF_DIR='/nesi/nobackup/ga03048/assemblies/hifiasm/01-assembly/'
 REF='/nesi/nobackup/ga03048/assemblies/hifiasm/01-assembly/weta-hic-hifiasm.p_ctg.fa' #'/path/to/reference_sequences/reference_sequences.fa'
@@ -55,6 +63,7 @@ REP_LABEL=$LABEL\_rep1
 MERGE_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm-raw/05_merged/' #'/path/to/final/merged/alignments/from/any/biological/replicates'
 MAPQ_FILTER=10
 CPU=$SLURM_CPUS_PER_TASK
+############
 
 echo "### Step 0: Check output directories exist & create them as needed"
 [ -d $RAW_DIR ] || mkdir -p $RAW_DIR
@@ -64,15 +73,13 @@ echo "### Step 0: Check output directories exist & create them as needed"
 [ -d $REP_DIR ] || mkdir -p $REP_DIR
 [ -d $MERGE_DIR ] || mkdir -p $MERGE_DIR
 
-#echo "### Step 0: Index reference" # Run only once! Skip this step if you have already generated BWA index files
+echo "### Step 0: Index reference" # Run only once! Skip this step if you have already generated BWA index files
 cd $REF_DIR
 if [ -f ${REF}.amb ]; then
-	echo "${REF} index found"
-	else
-		cd $REF_DIR
-		echo "Indexing ${REF}"
-		bwa index -a bwtsw -p $PREFIX $REF
-		echo "Finished indexing $REF"
+    echo "${REF} index found"
+    else
+	bwa index -a bwtsw -p $PREFIX $REF
+	echo "Finished indexing $REF"
 fi
 
 echo "### Step 1.A: FASTQ to BAM (1st)"
@@ -83,4 +90,5 @@ bwa mem -t $CPU -5SP $REF ${IN_DIR}${HIC}1.fastq.gz ${IN_DIR}${HIC}2.fastq.gz | 
  samtools view -@ $CPU -buSh -F 2316 - > ${RAW_DIR}${HIC}.bam
 
 echo "Finished step 1.A"
+
 
