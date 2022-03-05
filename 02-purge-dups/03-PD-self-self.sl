@@ -24,7 +24,7 @@ module load minimap2/2.20-GCC-9.2.0
 
 #########
 # PARAMS
-OUTDIR=/nesi/nobackup/ga03048/assemblies/hifiasm/purge-dups/
+OUTDIR=/nesi/nobackup/ga03048/assemblies/hifiasm/02-purge-dups/
 PRE=weta-hic-hifiasm # PREFIX
 PRI=p_ctg
 ALT=a_ctg

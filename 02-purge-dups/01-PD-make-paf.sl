@@ -25,8 +25,8 @@ module load minimap2/2.20-GCC-9.2.0
 
 #########
 # PARAMS
-INDIR=/nesi/nobackup/ga03048/assemblies/hifiasm/
-OUTDIR=/nesi/nobackup/ga03048/assemblies/hifiasm/purge-dups/
+INDIR=/nesi/nobackup/ga03048/assemblies/hifiasm/01-assembly/
+OUTDIR=/nesi/nobackup/ga03048/assemblies/hifiasm/02-purge-dups/
 DATA=/nesi/project/ga03048/data/pacbio/hifi/
 PRE=weta-hic-hifiasm # PREFIX - testing with single contig
 PRI=p_ctg

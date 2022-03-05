@@ -22,8 +22,8 @@
 ##########
 # PARAMS
 ##########
-INDIR=/nesi/nobackup/ga03048/assemblies/hifiasm/
-OUTDIR=/nesi/nobackup/ga03048/assemblies/hifiasm/purge-dups/
+INDIR=/nesi/nobackup/ga03048/assemblies/hifiasm/01-assembly/
+OUTDIR=/nesi/nobackup/ga03048/assemblies/hifiasm/02-purge-dups/
 PURGE_DUPS=/nesi/nobackup/ga03186/purge_dups/bin/
 PRE=weta-hic-hifiasm # PREFIX
 PRI=p_ctg
