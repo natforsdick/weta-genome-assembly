@@ -1,9 +1,9 @@
 #!/bin/bash 
 #SBATCH --account=ga03048
 #SBATCH --job-name=01-arima-indexing # job name (shows up in the queue)
-#SBATCH --cpus-per-task=48
-#SBATCH --mem=56G
-#SBATCH --time=15:00:00 #Walltime (HH:MM:SS)
+#SBATCH --cpus-per-task=56
+#SBATCH --mem=84G
+#SBATCH --time=08:00:00 #Walltime (HH:MM:SS)
 #SBATCH --mail-type=FAIL
 #SBATCH --mail-user=forsdickn@landcareresearch.co.nz
 #SBATCH --output %x.%j.out # CHANGE number for new run
@@ -62,7 +62,7 @@ REP_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm-raw/04_dedup/' #'/path/
 REP_LABEL=$LABEL\_rep1
 MERGE_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm-raw/05_merged/' #'/path/to/final/merged/alignments/from/any/biological/replicates'
 MAPQ_FILTER=10
-CPU=$SLURM_CPUS_PER_TASK
+CPU=48
 ############
 
 echo "### Step 0: Check output directories exist & create them as needed"
