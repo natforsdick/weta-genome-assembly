@@ -3,7 +3,7 @@
 #SBATCH --job-name=01-arima-indexing # job name (shows up in the queue)
 #SBATCH --cpus-per-task=56
 #SBATCH --mem=84G
-#SBATCH --time=08:00:00 #Walltime (HH:MM:SS)
+#SBATCH --time=12:00:00 #Walltime (HH:MM:SS)
 #SBATCH --mail-type=FAIL
 #SBATCH --mail-user=forsdickn@landcareresearch.co.nz
 #SBATCH --output %x.%j.out # CHANGE number for new run
@@ -44,7 +44,7 @@ module load BWA/0.7.17-GCC-9.2.0 picard/2.21.8-Java-11.0.4 SAMtools/1.13-GCC-9.2
 HIC='Weta_HiC_raw_all_R' #'basename_of_fastq_files'
 LABEL='Weta-HiC-mapped' #'overall_exp_name'
 BWA='bwa' #'/software/bwa/bwa-0.7.12/bwa'
-SAMTOOLS='samtools' #'/software/samtools/samtools-1.3.1/samtools'q
+SAMTOOLS='samtools' #'/software/samtools/samtools-1.3.1/samtools'
 IN_DIR='/nesi/nobackup/ga03048/data/HiC/weta/' # '/path/to/gzipped/fastq/files'
 REF_DIR='/nesi/nobackup/ga03048/assemblies/hifiasm/01-assembly/'
 REF='/nesi/nobackup/ga03048/assemblies/hifiasm/01-assembly/weta-hic-hifiasm.p_ctg.fa' #'/path/to/reference_sequences/reference_sequences.fa'
