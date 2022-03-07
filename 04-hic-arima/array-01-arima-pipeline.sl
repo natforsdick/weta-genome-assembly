@@ -1,8 +1,8 @@
 #!/bin/bash 
 #SBATCH --account=ga03048
 #SBATCH --job-name=01-arima-indexing # job name (shows up in the queue)
-#SBATCH --cpus-per-task=24
-#SBATCH --mem=24G
+#SBATCH --cpus-per-task=48
+#SBATCH --mem=52G
 #SBATCH --time=01:30:00 #Walltime (HH:MM:SS)
 #SBATCH --mail-type=FAIL
 #SBATCH --mail-user=forsdickn@landcareresearch.co.nz
