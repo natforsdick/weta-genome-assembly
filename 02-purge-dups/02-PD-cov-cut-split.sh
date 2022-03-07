@@ -44,7 +44,7 @@ elif [ "$1" == "ALT" ]; then
   
   ${PURGE_DUPS}calcuts ${R1}${PRE}-${ALT}-PB.stat > ${R1}${PRE}-${ALT}-cutoffs 2> ${R1}${PRE}-${ALT}-calcults.log
 
-  ${PURGE_DUPS}split_fa ${INDIR}${R1}${PRE}.${ALT}.hap-merged.fa > ${R1}${PRE}-${ALT}.split
+  ${PURGE_DUPS}split_fa ${OUTDIR}${R1}${PRE}.${ALT}.hap-merged.fa > ${R1}${PRE}-${ALT}.split
 
 else
 # step 02a: Produce PB.base.cov and PB.stat files
