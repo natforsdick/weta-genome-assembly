@@ -2,13 +2,13 @@
 #SBATCH --account=ga03048
 #SBATCH --job-name=01-arima-indexing # job name (shows up in the queue)
 #SBATCH --cpus-per-task=48
-#SBATCH --mem=52G
-#SBATCH --time=01:30:00 #Walltime (HH:MM:SS)
+#SBATCH --mem=64G
+#SBATCH --time=01:00:00 #Walltime (HH:MM:SS)
 #SBATCH --mail-type=FAIL
 #SBATCH --mail-user=forsdickn@landcareresearch.co.nz
 #SBATCH --output %x.%j.%a.out # CHANGE number for new run
 #SBATCH --error %x.%j.%a.err #  CHANGE number for new run
-#SBATCH --array=1-2
+#SBATCH --array=8-9 #%10
 #SBATCH --profile=task
 ################################
 
@@ -85,7 +85,7 @@ fi
 
 echo "### Step 1.A: FASTQ to BAM (1st)"
 
-samplesheet="${IN_DIR}samplesheet.txt"
+samplesheet="${IN_DIR}samplesheet1.txt"
 
 echo "r1=`sed -n "$SLURM_ARRAY_TASK_ID"p $samplesheet | awk '{print $1}'`"
 
