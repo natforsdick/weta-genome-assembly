@@ -3,8 +3,8 @@
 #SBATCH --job-name=04-purge-dups
 #SBATCH --output=%x.%j.out
 #SBATCH --error=%x.%j.err
-#SBATCH --time=01:00:00
-#SBATCH --mem=36G
+#SBATCH --time=01:20:00
+#SBATCH --mem=38G
 #SBATCH --ntasks=1
 #SBATCH --profile=task 
 #SBATCH --account=ga03048
