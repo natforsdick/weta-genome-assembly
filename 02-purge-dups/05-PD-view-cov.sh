@@ -19,7 +19,7 @@
 ##########
 # PARAMS
 PURGE_DUPS=/nesi/nobackup/ga03186/purge_dups/scripts/
-OUTDIR=/nesi/nobackup/ga03048/assemblies/hifiasm/purge-dups/
+OUTDIR=/nesi/nobackup/ga03048/assemblies/hifiasm/02-purge-dups/
 PRE=weta-hic-hifiasm- # PREFIX
 PRI=p_ctg
 ALT=a_ctg
