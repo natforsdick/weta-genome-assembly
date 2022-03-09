@@ -53,12 +53,12 @@ elif [ "$1" == "ALT" ]; then
   if [ "$2" == "R1" ]; then
     ${PURGE_DUPS}purge_dups -2 -T ${R1}${PRE}-${ALT}-cutoffs -c ${R1}${PRE}-${ALT}-PB.base.cov ${R1}${PRE}-${ALT}.split.self.paf.gz > ${R1}${PRE}-${ALT}-dups.bed 2> ${R1}${PRE}-${ALT}-purge_dups.log
 
-    ${PURGE_DUPS}get_seqs -e ${R1}${PRE}-${ALT}-dups.bed ${INDIR}${R1}${PRE}.${ALT}.hap-merged.fa
+    ${PURGE_DUPS}get_seqs -e ${R1}${PRE}-${ALT}-dups.bed ${R1}${PRE}.${ALT}.hap-merged.fa
 
   elif [ "$2" == "R2" ]; then
     ${PURGE_DUPS}purge_dups -2 -T ${R2}${PRE}${ALT}-cutoffs -c ${R1}${PRE}${ALT}-PB.base.cov ${R1}${PRE}${ALT}.split.self.paf.gz > ${R2}${PRE}${ALT}-dups.bed 2> ${R2}${PRE}${ALT}-purge_dups.log
 
-    ${PURGE_DUPS}get_seqs -e ${R2}${PRE}${ALT}-dups.bed ${INDIR}${R2}${PRE}.${ALT}.hap-merged.fa
+    ${PURGE_DUPS}get_seqs -e ${R2}${PRE}${ALT}-dups.bed ${R2}${PRE}.${ALT}.hap-merged.fa
   fi
 
 else
