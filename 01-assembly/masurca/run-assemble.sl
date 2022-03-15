@@ -4,7 +4,7 @@
 #SBATCH --job-name masurca-weta
 #SBATCH --cpus-per-task=32
 #SBATCH --mem 250G #initial try with 96
-#SBATCH --time 12:00:00
+#SBATCH --time 1-00:00:00
 #SBATCH --output %x.%j.out
 #SBATCH --error %x.%j.err
 #SBATCH --profile=task
