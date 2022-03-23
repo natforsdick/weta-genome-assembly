@@ -25,7 +25,7 @@ cd $indir
 
 # call samplist from file, and pass to array
 SAMPLE_LIST=($(<input-fastq-list2.txt))
-SAMPLE=${SAMPLE_LIST[${SLURM_ARRAY_TASK_ID}]}
+SAMPLE=${SAMPLE_LIST[${SLURM_ARRAY_TASK_ID}+1]}
 
 # test for single samp uses for loop:
 #for file in ${indir}H07456-L1_S1_L001_R1_001.fastq_trimmed_1P.fastq.gz
