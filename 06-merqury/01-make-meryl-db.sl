@@ -7,7 +7,7 @@
 #SBATCH --output %j.%A.%a.out
 #SBATCH --error %j.%A.%a.err
 #SBATCH --profile=task
-#SBATCH --array=1-6
+#SBATCH --array=1-4
 
 ##########
 # PARAMS #
@@ -24,7 +24,7 @@ outdir=/nesi/nobackup/ga03048/assemblies/hifiasm/05-merqury/
 cd $indir
 
 # call samplist from file, and pass to array
-SAMPLE_LIST=($(<input-fastq-list.txt))
+SAMPLE_LIST=($(<input-fastq-list2.txt))
 SAMPLE=${SAMPLE_LIST[${SLURM_ARRAY_TASK_ID}]}
 
 # test for single samp uses for loop:
