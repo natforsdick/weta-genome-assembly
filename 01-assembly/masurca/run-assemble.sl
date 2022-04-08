@@ -2,8 +2,8 @@
 
 #SBATCH --account ga03048
 #SBATCH --job-name masurca-weta
-#SBATCH --cpus-per-task=54
-#SBATCH --mem 280G #initial try with 96
+#SBATCH --cpus-per-task=56
+#SBATCH --mem 400G #initial try with 96
 #SBATCH --time 2-00:00:00
 #SBATCH --output %x.%j.out
 #SBATCH --error %x.%j.err
@@ -27,7 +27,7 @@ date
 
 cd /nesi/nobackup/ga03048/assemblies/masurca/
 
-bash /nesi/nobackup/ga03048/assemblies/masurca/assemble.sh > 2022-04-04-assemble.out
+bash /nesi/nobackup/ga03048/assemblies/masurca/assemble.sh > 2022-04-04e-assemble.out
 
 echo Finishing MaSuRCA at
 date
