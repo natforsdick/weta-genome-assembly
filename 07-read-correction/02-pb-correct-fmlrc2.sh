@@ -7,7 +7,7 @@
 #SBATCH --cpus-per-task 24 # 
 #SBATCH	--error=%x.%A.%a.err
 #SBATCH	--output=%x.%A.%a.out
-#SBATCH --array=1-11%4
+#SBATCH --array=1-2#-11%4
 #SBATCH	--profile=task
 
 # 02-pb-correct-fmlrc2.sh
