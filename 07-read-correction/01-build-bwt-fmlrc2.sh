@@ -2,9 +2,9 @@
 
 #SBATCH -A ga03048
 #SBATCH -J fmlrc2
-#SBATCH --time 1-00:00:00 # step 1 used 20 hrs
-#SBATCH --mem 80G # step 1: 40 GB
-#SBATCH --cpus-per-task 24 # step 1: ~2 CPU
+#SBATCH --time 2-03:00:00 
+#SBATCH --mem 95G 
+#SBATCH --cpus-per-task 4 
 #SBATCH	--error=%x.%j.err
 #SBATCH	--out=%x.%j.out
 #SBATCH	--profile=task
@@ -37,8 +37,8 @@ date
 cd ${outdir}
 
 # step 1: make BWT
-gunzip -c ${illuminadir}H07456-L1_S1_L001_R1_001*P.fastq.gz | awk "NR % 4 == 2" | sort -T $TMPDIR | tr NT TN |\
-	ropebwt2 -LR | tr NT TN | fmlrc2-convert weta_msbwt.npy
+gunzip -c ${illuminadir}*P.fastq.gz | awk "NR % 4 == 2" | sort -T $TMPDIR | tr NT TN |\
+ropebwt2 -LR | tr NT TN | fmlrc2-convert weta_msbwt.npy
 
 echo "Completed BWT at"
 date
