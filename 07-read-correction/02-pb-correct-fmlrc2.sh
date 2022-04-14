@@ -30,9 +30,6 @@ source activate ropebwt2
 module load rust-fmlrc/0.1.5-GCCcore-9.2.0
 ###########
 
-echo "Beginning building BWT at"
-date
-
 cd ${datadir}
 
 echo "Beginning fmlrc2 correction at"
