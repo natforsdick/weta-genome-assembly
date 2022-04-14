@@ -2,8 +2,8 @@
 
 #SBATCH -A ga03048
 #SBATCH -J fmlrc2
-#SBATCH --time 1-00:00:00 # 
-#SBATCH --mem 120G # 
+#SBATCH --time 00:05:00 # 
+#SBATCH --mem 150G # 
 #SBATCH --cpus-per-task 12 # 
 #SBATCH	--error=%x.%A.%a.err
 #SBATCH	--output=%x.%A.%a.out
@@ -46,7 +46,7 @@ filename=${filename%.*}
 
 echo $filename
 
-fmlrc2 -t $SLURM_CPUS_PER_TASK -C 14 ${outdir}weta_msbwt.npy ${file} ${outdir}${filename}-fmlrc2-corr-reads.fa
+fmlrc2 -t $SLURM_CPUS_PER_TASK ${outdir}weta_msbwt.npy ${file} ${outdir}${filename}-fmlrc2-corr-reads.fa
 
 echo "Completed fmlrc2 correction for ${filename} at"
 date
