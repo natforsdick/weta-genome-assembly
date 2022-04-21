@@ -3,7 +3,7 @@
 #SBATCH -A ga03048
 #SBATCH -J fmlrc2
 #SBATCH --time 06:00:00 # 
-#SBATCH --mem 200G # 
+#SBATCH --mem 80G # 
 #SBATCH --cpus-per-task 12 # 
 #SBATCH	--error=%x.%A.%a.err
 #SBATCH	--output=%x.%A.%a.out
@@ -29,6 +29,11 @@ module load Anaconda3
 source activate ropebwt2
 module load rust-fmlrc/0.1.5-GCCcore-9.2.0
 ###########
+
+# Avoid SLURM OOM issues
+export TMPDIR=/nesi/nobackup/ga03186/tmp_${SLURM_JOB_ID}
+mkdir -p $TMPDIR
+export TMPDIR
 
 cd ${datadir}
 
