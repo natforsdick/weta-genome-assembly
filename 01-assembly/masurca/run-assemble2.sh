@@ -2,9 +2,9 @@
 
 #SBATCH --account ga03048
 #SBATCH --job-name masurca-weta
-#SBATCH --cpus-per-task=12
-#SBATCH --mem 50G 
-#SBATCH --time 00:20:00
+#SBATCH --cpus-per-task=48
+#SBATCH --mem 140G 
+#SBATCH --time 12:00:00
 #SBATCH --output %x.%j.out
 #SBATCH --error %x.%j.err
 #SBATCH --profile=task
@@ -22,7 +22,7 @@ ml MaSuRCA/4.0.9-gimkl-2020a
 ml minimap2/2.20-GCC-9.2.0
 ############
 
-export TMPDIR=/nesi/nobackup/ga03186/tmp_${SLURM_JOB_ID}
+export TMPDIR=/nesi/nobackup/ga03048/tmp_${SLURM_JOB_ID}
 mkdir -p $TMPDIR
 export TMPDIR
 
@@ -31,7 +31,7 @@ date
 
 cd /nesi/nobackup/ga03048/assemblies/masurca4.0.9/
 
-bash ./assemble.sh > 2022-04-22-assemble.out
+bash ./assemble.sh > 2022-04-26-assemble.out
 
 echo Finishing MaSuRCA at
 date
