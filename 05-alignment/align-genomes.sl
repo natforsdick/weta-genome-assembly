@@ -3,7 +3,7 @@
 #SBATCH --job-name=minimap-aln
 #SBATCH --output=%x.%j.out
 #SBATCH --error=%x.%j.err
-#SBATCH --time=03:00:00
+#SBATCH --time=06:00:00
 #SBATCH --mem=50G #Used 26 for whole genomes
 #SBATCH --profile=task 
 #SBATCH --account=ga03048
