@@ -2,7 +2,7 @@
 
 #SBATCH -A ga03048
 #SBATCH -J fmlrc2
-#SBATCH --time 06:00:00 # 
+#SBATCH --time 00:10:00 # 
 #SBATCH --mem 80G # 
 #SBATCH --cpus-per-task 12 # 
 #SBATCH	--error=%x.%A.%a.err
@@ -27,7 +27,7 @@ outdir=/nesi/nobackup/ga03048/correction/fmlrc2/
 module purge
 module load Anaconda3
 source activate ropebwt2
-module load rust-fmlrc/0.1.5-GCCcore-9.2.0
+module load rust-fmlrc/0.1.7-GCCcore-11.2.0
 ###########
 
 # Avoid SLURM OOM issues
