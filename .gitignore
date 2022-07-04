@@ -4,5 +4,6 @@
 *.h5
 *.log
 *.sl
+*.pl
 QC/MyAugustusConfig/
 03-hic-arima/old-scripts/
