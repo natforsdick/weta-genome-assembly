@@ -3,4 +3,4 @@
 *.out
 *.h5
 *.log
-./QC/MyAugustusConfig/*
+QC/MyAugustusConfig/
