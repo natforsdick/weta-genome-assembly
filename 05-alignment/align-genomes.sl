@@ -3,7 +3,7 @@
 #SBATCH --job-name=minimap-aln
 #SBATCH --output=%x.%j.out
 #SBATCH --error=%x.%j.err
-#SBATCH --time=06:00:00
+#SBATCH --time=08:00:00
 #SBATCH --mem=50G #Used 26 for whole genomes
 #SBATCH --profile=task 
 #SBATCH --account=ga03048
@@ -24,6 +24,10 @@ QUERY=01-weta-hic-hifiasm.a_ctg.hap-merged
 REFDIR=/nesi/nobackup/ga03048/assemblies/hifiasm/02-purge-dups/
 REF=01-weta-hic-hifiasm-p_ctg-purged
 OUTDIR=/nesi/nobackup/ga03048/assemblies/hifiasm/04-alignment/
+
+export TMPDIR=/nesi/nobackup/ga03048/tmp_${SLURM_JOB_ID}
+mkdir -p $TMPDIR
+export TMPDIR
 
 cd $OUTDIR
 
