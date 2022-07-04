@@ -1,14 +1,5 @@
 #!/bin/bash -e
 
-#SBATCH -A ga03048
-#SBATCH -J fmlrc2
-#SBATCH --time 2-03:00:00 
-#SBATCH --mem 95G 
-#SBATCH --cpus-per-task 4 
-#SBATCH	--error=%x.%j.err
-#SBATCH	--out=%x.%j.out
-#SBATCH	--profile=task
-
 # 01-build-bwt-fmlrc2.sh
 # Nat Forsdick, 2022-04-06
 # Step 1 in fmlrc2 correction of raw PacBio reads

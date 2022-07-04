@@ -22,4 +22,4 @@ cd ${OUTDIR}
 echo $CUTOFFS
 ${PURGE_DUPS}calcuts ${CUTOFFS} ${R1}${PRE}${PRI}-PB.stat > ${R2}${PRE}${PRI}-cutoffs
 
-# Following this, you need to run steps 04-07 with $ROUND modified for new cutoffs.
+# Following this, you need to run steps 04-06 with $ROUND modified for new cutoffs.
