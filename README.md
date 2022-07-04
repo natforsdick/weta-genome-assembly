@@ -2,6 +2,8 @@
 
 All scripts related to genome assembly for Little Barrier giant wētā (*Deinacrida heteracantha*). This project is a Genomics Aotearoa & MWLR collaboration led by Thomas Buckley. Contributors include Manpreet Dhami, Ann Mc Cartney, Dukchul Park, Dini Senanayake, Natalie Forsdick.
 
+This repo doesn't contain anything particularly novel, it merely is a record of the various tools used for wētā genome assembly. No doubt there are improvements that could be made to my scripting.
+
 Input data: PacBio CLR 'HiFi-like', Illumina HiSeq, Hi-C.
 
 [01-assembly](01-assembly/) - Testing hifiasm, HiCanu, and MaSuRCA to assemble PacBio 'HiFi-like' data. To date (2022-07-04) only hifiasm has completed.
