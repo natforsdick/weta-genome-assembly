@@ -1,6 +1,6 @@
 # Wētā genome assembly
 
-All scripts related to genome assembly for Little Barrier giant wētā (*Deinacrida heteracantha*).
+All scripts related to genome assembly for Little Barrier giant wētā (*Deinacrida heteracantha*). This project is a Genomics Aotearoa & MWLR collaboration led by Thomas Buckley. Contributors include Manpreet Dhami, Ann Mc Cartney, Dukchul Park, Dini Senanayake, Natalie Forsdick.
 
 Input data: PacBio CLR 'HiFi-like', Illumina HiSeq, Hi-C.
 
