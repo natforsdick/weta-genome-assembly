@@ -1,6 +1,6 @@
 # Wētā genome assembly
 
-All scripts related to genome assembly for Little Barrier giant wētā (**Deinacrida heteracantha**).
+All scripts related to genome assembly for Little Barrier giant wētā (*Deinacrida heteracantha*).
 
 Input data: PacBio CLR 'HiFi-like', Illumina HiSeq, Hi-C.
 
