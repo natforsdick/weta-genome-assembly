@@ -45,7 +45,7 @@ REP_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm-purged/04_dedup' #'/pat
 REP_LABEL=$LABEL\_rep1
 MERGE_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm-purged/05_merged' #'/path/to/final/merged/alignments/from/any/biological/replicates'
 MAPQ_FILTER=10
-CPU=48
+CPU=24
 
 #########################################
 # COMMANDS #
