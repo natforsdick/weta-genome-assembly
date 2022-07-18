@@ -66,24 +66,31 @@ cd $RAW_DIR
 #$BWA index -a bwtsw -p $PREFIX $REF
 
 cd $IN_DIR
-echo "### Step 1.A: FASTQ to BAM (1st)"
-$BWA mem -t $CPU $REF ${IN_DIR}/${SRA}1.fastq.gz | $SAMTOOLS view -@ $CPU -Sb - > $RAW_DIR/${SRA}1.bam
+#echo "### Step 1.A: FASTQ to BAM (1st)"
+date
+#$BWA mem -t $CPU $REF ${IN_DIR}/${SRA}1.fastq.gz | $SAMTOOLS view -@ $CPU -Sb - > $RAW_DIR/${SRA}1.bam
  
 echo "### Step 1.B: FASTQ to BAM (2nd)"
+date
 $BWA mem -t $CPU $REF ${IN_DIR}/${SRA}2.fastq.gz | $SAMTOOLS view -@ $CPU -Sb - > ${RAW_DIR}/${SRA}2.bam
 
 echo "### Step 2.A: Filter 5' end (1st)"
+date
 samtools view -@ ${CPU} -h ${RAW_DIR}/${SRA}1.bam | perl $FILTER | samtools view -@ ${CPU} -Sb - > ${FILT_DIR}/${SRA}1.bam
 
 echo "### Step 2.B: Filter 5' end (2nd)"
+date
 samtools view -@ ${CPU} -h ${RAW_DIR}/${SRA}2.bam | perl $FILTER | samtools view -@ ${CPU} -Sb - > ${FILT_DIR}/${SRA}2.bam
 
 echo "### Step 3A: Pair reads & mapping quality filter"
+date
 perl $COMBINER ${FILT_DIR}/${SRA}1.bam ${FILT_DIR}/${SRA}2.bam samtools $MAPQ_FILTER | samtools view -@ ${CPU} -bS -t $FAIDX - | samtools sort -@ $CPU -o ${TMP_DIR}/${SRA}.bam -
 
 echo "### Step 3.B: Add read group"
+date
 java -Xmx40G -Djava.io.tmpdir=${TMP_DIR} -jar $PICARD AddOrReplaceReadGroups INPUT=${TMP_DIR}/${SRA}.bam OUTPUT=${PAIR_DIR}/${SRA}.bam ID=$SRA LB=$SRA SM=$LABEL PL=ILLUMINA PU=none
 echo "Completed Step 3.B"
+date
 ###############################################################################################################################################################
 ###                                           How to Accommodate Technical Replicates                                                                       ###
 ### This pipeline is currently built for processing a single sample with one read1 and read2 fastq file.                                                    ###
@@ -98,6 +105,7 @@ echo "Completed Step 3.B"
 #	java -Xmx8G -Djava.io.tmpdir=temp/ -jar $PICARD MergeSamFiles $INPUTS_TECH_REPS OUTPUT=$TMP_DIR/$REP_LABEL.bam USE_THREADING=TRUE ASSUME_SORTED=TRUE VALIDATION_STRINGENCY=LENIENT
 
 echo "### Step 4: Mark duplicates"
+date
 java -Xmx40G -XX:-UseGCOverheadLimit -Djava.io.tmpdir=${TMP_DIR} -jar $PICARD MarkDuplicates INPUT=${PAIR_DIR}/${SRA}.bam OUTPUT=${REP_DIR}/${REP_LABEL}.bam METRICS_FILE=${REP_DIR}/metrics.${REP_LABEL}.txt TMP_DIR=${TMP_DIR} ASSUME_SORTED=TRUE VALIDATION_STRINGENCY=LENIENT REMOVE_DUPLICATES=TRUE
 
 samtools index -@ ${CPU} ${REP_DIR}/${REP_LABEL}.bam
@@ -109,7 +117,7 @@ samtools depth ${REP_DIR}/${REP_LABEL}.bam > ${REP_DIR}/${REP_LABEL}-cov.txt
 java -Xmx40G -XX:-UseGCOverheadLimit -Djava.io.tmpdir=${TMP_DIR} -jar $PICARD CollectAlignmentSummaryMetrics -R=$REF I=${REP_DIR}/${REP_LABEL}.bam O=${REP_DIR}/${REP_LABEL}-summarystats.txt
 
 echo "Finished Mapping Pipeline through Duplicate Removal"
-
+date
 #########################################################################################################################################
 ###                                       How to Accommodate Biological Replicates                                                    ###
 ### This pipeline is currently built for processing a single sample with one read1 and read2 fastq file.                              ###
