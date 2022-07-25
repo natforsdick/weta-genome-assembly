@@ -67,7 +67,7 @@ cd $RAW_DIR
 
 cd $IN_DIR
 #echo "### Step 1.A: FASTQ to BAM (1st)"
-date
+#date
 #$BWA mem -t $CPU $REF ${IN_DIR}/${SRA}1.fastq.gz | $SAMTOOLS view -@ $CPU -Sb - > $RAW_DIR/${SRA}1.bam
  
 echo "### Step 1.B: FASTQ to BAM (2nd)"
@@ -114,7 +114,7 @@ perl $STATS ${REP_DIR}/${REP_LABEL}.bam > ${REP_DIR}/${REP_LABEL}.bam.stats
 
 samtools depth ${REP_DIR}/${REP_LABEL}.bam > ${REP_DIR}/${REP_LABEL}-cov.txt
 
-java -Xmx40G -XX:-UseGCOverheadLimit -Djava.io.tmpdir=${TMP_DIR} -jar $PICARD CollectAlignmentSummaryMetrics -R=$REF I=${REP_DIR}/${REP_LABEL}.bam O=${REP_DIR}/${REP_LABEL}-summarystats.txt
+java -Xmx40G -XX:-UseGCOverheadLimit -Djava.io.tmpdir=${TMP_DIR} -jar $PICARD CollectAlignmentSummaryMetrics R=$REF I=${REP_DIR}/${REP_LABEL}.bam O=${REP_DIR}/${REP_LABEL}-summarystats.txt
 
 echo "Finished Mapping Pipeline through Duplicate Removal"
 date
