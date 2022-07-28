@@ -30,20 +30,21 @@ LABEL='Weta-HiC-mapped' #'overall_exp_name'
 BWA='bwa' #'/software/bwa/bwa-0.7.12/bwa'
 SAMTOOLS='samtools' #'/software/samtools/samtools-1.3.1/samtools'
 IN_DIR='/nesi/nobackup/ga03048/data/HiC/weta/' # '/path/to/gzipped/fastq/files' to CHECK
-REF='/nesi/nobackup/ga03048/assemblies/hifiasm/02-purge-dups/02-weta-hic-hifiasm-p_ctg-purged.fa' #'/path/to/reference_sequences/reference_sequeneces.fa'
+REF='/nesi/nobackup/ga03048/assemblies/hifiasm/01-assembly/weta-hic-hifiasm.p_ctg.fa' #'/path/to/reference_sequences/reference_sequeneces.fa'
 FAIDX=$REF.fai
-PREFIX='02-weta-hic-hifiasm-p_ctg-purged' #'bwa_index_name' TO CHECK - PURGED INPUT
-RAW_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm-purged/01_mapped' #'/path/to/write/out/bams'
-FILT_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm-purged/02_filtered' #'/path/to/write/out/filtered/bams'
-FILTER='/nesi/project/ga03186/scripts/Hi-C_scripts/filter_five_end.pl' #'/path/to/filter_five_end.pl'
-COMBINER='/nesi/project/ga03186/scripts/Hi-C_scripts/two_read_bam_combiner.pl' #'/path/to/two_read_bam_combiner.pl'
-STATS='/nesi/project/ga03186/scripts/Hi-C_scripts/get_stats.pl' #'/path/to/get_stats.pl'
+ARIMA=/nesi/project/ga03186/bin/ARIMA/
+PREFIX='weta-hic-hifiasm.p_ctg' #'bwa_index_name' TO CHECK - PURGED INPUT
+RAW_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm/01_mapped' #'/path/to/write/out/bams'
+FILT_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm/02_filtered' #'/path/to/write/out/filtered/bams'
+FILTER=${ARIMA}filter_five_end.pl #'/path/to/filter_five_end.pl'
+COMBINER=${ARIMA}two_read_bam_combiner.pl #'/path/to/two_read_bam_combiner.pl'
+STATS=${ARIMA}get_stats.pl #'/path/to/get_stats.pl'
 PICARD='/opt/nesi/mahuika/picard/2.21.8-Java-11.0.4/picard.jar'
-TMP_DIR="/nesi/nobackup/ga03048/tmp-${SLURM_JOB_ID}" #'/path/to/write/out/temporary/files'
-PAIR_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm-purged/03_paired' #'/path/to/write/out/paired/bams'
-REP_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm-purged/04_dedup' #'/path/to/where/you/want/deduplicated/files'
+TMP_DIR="/nesi/nobackup/ga03048/tmp-${SLURM_JOB_ID}" #/path/to/write/tempfiles
+PAIR_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm/03_paired' #'/path/to/write/out/paired/bams'
+REP_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm/04_dedup' #'/path/to/where/you/want/deduplicated/files'
 REP_LABEL=$LABEL\_rep1
-MERGE_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm-purged/05_merged' #'/path/to/final/merged/alignments/from/any/biological/replicates'
+MERGE_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm/05_merged' #'/path/to/final/merged/alignments/from/any/biological/replicates'
 MAPQ_FILTER=10
 CPU=24
 
@@ -59,16 +60,15 @@ CPU=24
 [ -d $REP_DIR ] || mkdir -p $REP_DIR
 [ -d $MERGE_DIR ] || mkdir -p $MERGE_DIR
 
-cd $RAW_DIR
 # Steps 1-2 require 7 hrs, 20 cpu, 10 GB mem
-#cd $REF_DIR
-#echo "### Step 0: Index reference" # Run only once! Skip this step if you have already generated BWA index files
-#$BWA index -a bwtsw -p $PREFIX $REF
+cd $REF_DIR
+echo "### Step 0: Index reference" # Run only once! Skip this step if you have already generated BWA index files
+$BWA index -a bwtsw -p $PREFIX $REF
 
 cd $IN_DIR
-#echo "### Step 1.A: FASTQ to BAM (1st)"
-#date
-#$BWA mem -t $CPU $REF ${IN_DIR}/${SRA}1.fastq.gz | $SAMTOOLS view -@ $CPU -Sb - > $RAW_DIR/${SRA}1.bam
+echo "### Step 1.A: FASTQ to BAM (1st)"
+date
+$BWA mem -t $CPU $REF ${IN_DIR}/${SRA}1.fastq.gz | $SAMTOOLS view -@ $CPU -Sb - > $RAW_DIR/${SRA}1.bam
  
 echo "### Step 1.B: FASTQ to BAM (2nd)"
 date
