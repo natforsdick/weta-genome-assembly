@@ -15,8 +15,8 @@ module load BUSCO/5.2.2-gimkl-2020a
 #export BUSCO_CONFIG_FILE="/nesi/project/ga03048/scripts/config.ini"
 
 OUTDIR=/nesi/nobackup/ga03048/assemblies/hifiasm/BUSCO/
-IN_DIR=/nesi/nobackup/ga03048/assemblies/hifiasm/02-purge-dups/
-samplist='01-weta-hic-hifiasm-a_ctg-purged' #'weta-hic-hifiasm.cns'
+IN_DIR=/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm-purged/05-scaffolding/asm1-hifiasm-pri-pur2-scaff/
+samplist='yahs_scaffolds_final' #'weta-hic-hifiasm.cns'
 INSECT_DB=/nesi/project/ga03048/insecta_odb10
 
 for samp in $samplist
