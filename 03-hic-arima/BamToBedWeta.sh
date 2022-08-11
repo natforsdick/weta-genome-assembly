@@ -9,9 +9,9 @@ module purge
 module load BEDTools/2.29.2-GCC-9.2.0
 
 LABEL='Weta-HiC-mapped'
-REP_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm-purged/04_dedup/'
-REF_DIR='/nesi/nobackup/ga03048/assemblies/hifiasm/02-purge-dups/'
-REF='02-weta-hic-hifiasm-p_ctg-purged.fa'
+REP_DIR='/nesi/nobackup/ga03048/assemblies/SALSA/hifiasm/04_dedup/'
+REF_DIR='/nesi/nobackup/ga03048/assemblies/hifiasm/01-assembly/'
+REF='weta-hic-hifiasm.p_ctg.fa'
 
 echo “Converting ${LABEL}\_rep1.bam to bed file”
 bamToBed -i ${REP_DIR}${LABEL}\_rep1.bam > ${REP_DIR}${LABEL}\_rep1.bed
