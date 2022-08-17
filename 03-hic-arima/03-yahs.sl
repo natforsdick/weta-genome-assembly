@@ -3,7 +3,7 @@
 #SBATCH --job-name=weta-yahs # job name (shows up in the queue)
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=12G
-#SBATCH --time=00:40:00 #Walltime (HH:MM:SS)
+#SBATCH --time=00:20:00 #Walltime (HH:MM:SS)
 #SBATCH --mail-type=FAIL
 #SBATCH --mail-user=forsdickn@landcareresearch.co.nz
 #SBATCH --output %x.%j.out # CHANGE number for new run
