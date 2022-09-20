@@ -3,7 +3,7 @@
 #SBATCH -J TGSGapClose
 #SBATCH --time=24:00:00
 #SBATCH --cpus-per-task=12
-#SBATCH --mem=350G
+#SBATCH --mem=200G
 #SBATCH --output %x.%j.out 
 #SBATCH --error %x.%j.err
 #SBATCH --profile=task=120
@@ -23,6 +23,7 @@ $TGSGapCloser \
         --reads $CONTIGS \
         --output ${OUTDIR}01-pur-wtdbg  \
         --ne #no error correction\
-        --thread 32 \
+        --thread 8 \
+	--minimap_arg '-K 100M --no-kalloc' \
         >${OUTDIR}pipe.log 2>${OUTDIR}pipe.err
 
