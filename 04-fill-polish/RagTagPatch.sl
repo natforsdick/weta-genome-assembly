@@ -15,14 +15,15 @@
 
 # PARAMS #
 QUERY=/nesi/project/ga03048/results/redbean/weta-asm1-cns/weta-asm1-wtdbg.cns.fa
-TARGET=/nesi/nobackup/ga03048/assemblies/hifiasm/02-purge-dups/01-weta-hic-hifiasm-p_ctg-purged.fa
-OUTDIR=/nesi/nobackup/ga03048/assemblies/hifiasm/06-GapClose/
+TARGET=/nesi/nobackup/ga03048/assemblies/hifiasm/03-scaffolding/hifiasm-purged2/05-scaffolding/asm1-hifiasm-pri-pur2-scaff/yahs_scaffolds_final.fa
+OUTDIR=/nesi/nobackup/ga03048/assemblies/hifiasm/06-GapClose/asm1-hifiasm-pripur2-yahs-ragtag/
 
 # ENVIRONMENT #
 ml Miniconda3/4.12.0 minimap2/2.24-GCC-9.2.0
 source /opt/nesi/CS400_centos7_bdw/Miniconda3/4.8.3/etc/profile.d/conda.sh
 conda activate ragtag
 
+mkdir $OUTDIR
 cd $OUTDIR
 ragtag.py patch $TARGET $QUERY -o $OUTDIR -t 12 --aligner minimap2
 conda deactivate
