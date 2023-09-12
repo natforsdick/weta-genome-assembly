@@ -8,11 +8,13 @@ Input data: PacBio CLR 'HiFi-like', Illumina HiSeq, Hi-C.
 
 [01-assembly](01-assembly/) - Testing hifiasm, HiCanu, and MaSuRCA to assemble PacBio 'HiFi-like' data. To date (2022-07-04) only hifiasm has completed.
 
-[02-purge-dups](02-purge-dups/) - Implementing the purge-dups pipeline to remove duplicate contigs.
+[02-purge-dups](02-purge-dups/) - Implementing the [purge-dups pipeline](https://github.com/dfguan/purge_dups) to remove duplicate contigs.
 
-[03-hic-arima](03-hic-arima/) - Using HiSeq data to polish the purged assembly.
+[03-scaffolding](03-scaffolding/) - Using the [Dovetail Omni-C pipeline](https://omni-c.readthedocs.io/en/latest/index.html) and [YaHS](https://github.com/c-zhou/yahs) to scaffold the assembly.
 
-[04-polish](04-polish/) - Using the Arima pipeline to map Hi-C data to the purged assembly, then SALSA or YAHS to perform scaffolding.
+Subsequent steps are all just exploratory at this point.
+
+[04-fill-polish](04-fill-polish/) - Exploring the use of gapfilling tools to improve the scaffolded assembly.
 
 [05-alignment](05-alignment/) - Aligning draft genomes against one another for comparisons.
 
