@@ -1,9 +1,9 @@
 #!/bin/bash
 #SBATCH --account=ga03048
 #SBATCH --job-name=weta-yahs # job name (shows up in the queue)
-#SBATCH --cpus-per-task=8
-#SBATCH --mem=32G
-#SBATCH --time=03:00:00 #Walltime (HH:MM:SS)
+#SBATCH --cpus-per-task=2
+#SBATCH --mem=16G
+#SBATCH --time=02:00:00 #Walltime (HH:MM:SS)
 #SBATCH --mail-type=FAIL
 #SBATCH --mail-user=forsdickn@landcareresearch.co.nz
 #SBATCH --output %x.%j.out # CHANGE number for new run
@@ -16,11 +16,11 @@
 
 # make output directory prior to running.
 YAHS='/nesi/project/ga03186/scripts/Hi-C_scripts/yahs/yahs'
-REF_DIR='/nesi/nobackup/ga03048/weta/assemblies/hifiasm/02-purge-dups/'
-REF='02-weta-hic-hifiasm-p_ctg-purged.fa'
-IN_DIR='/nesi/nobackup/ga03048/weta/assemblies/hifiasm/03-scaffolding/2023-OmniC/01-mapping/'
-IN_BAM='02-weta-hic-hifiasm-p_ctg-purged-AG1149-mapped.PT.bam'
-OUT_DIR='/nesi/nobackup/ga03048/weta/assemblies/hifiasm/03-scaffolding/2023-OmniC/02-scaffolding/'
+REF_DIR='/nesi/nobackup/ga03048/weta/assemblies/hifiasm/03-scaffolding/2023-OmniC/02-scaffolding/'
+REF='out_JBAT-2023-12-12-curated.FINAL.fa'
+IN_DIR='/nesi/nobackup/ga03048/weta/assemblies/hifiasm/03-scaffolding/2023-OmniC/02-scaffolding/omnic-r2/'
+IN_BAM='out_JBAT-2023-12-12-curated-AG1149-mapped.PT.bam'
+OUT_DIR='/nesi/nobackup/ga03048/weta/assemblies/hifiasm/03-scaffolding/2023-OmniC/02-scaffolding/omnic-r2/yahs/'
 
 if [ ! -e ${OUT_DIR} ]; then
 	mkdir -p ${OUT_DIR}

@@ -14,11 +14,11 @@ ml SAMtools/1.15.1-GCC-11.3.0 BWA/0.7.17-GCC-11.3.0
 
 #########
 # PARAMS
-PREFIX=02-weta-hic-hifiasm-p_ctg-purged-AG1149
+PREFIX=out_JBAT-2023-12-12-curated-AG1149
 INDIR=/nesi/nobackup/ga03048/weta/assemblies/hifiasm/03-scaffolding/2023-OmniC/2023-OmniC-out/
-OUTDIR=/nesi/nobackup/ga03048/weta/assemblies/hifiasm/03-scaffolding/2023-OmniC/01-mapping/
-REFDIR=/nesi/nobackup/ga03048/weta/assemblies/hifiasm/02-purge-dups/
-REFPRE=02-weta-hic-hifiasm-p_ctg-purged
+OUTDIR=/nesi/nobackup/ga03048/weta/assemblies/hifiasm/03-scaffolding/2023-OmniC/02-scaffolding/omnic-r2/
+REFDIR=/nesi/nobackup/ga03048/weta/assemblies/hifiasm/03-scaffolding/2023-OmniC/02-scaffolding/
+REFPRE=out_JBAT-2023-12-12-curated.FINAL
 REF=${REFDIR}${REFPRE}.fa
 TMPDIR="/nesi/nobackup/ga03186/tmp-omnic-${SLURM_JOB_ID}"
 FQ1=_R1_001_clean.fastq.gz
