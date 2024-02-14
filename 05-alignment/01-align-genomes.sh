@@ -7,18 +7,18 @@
 #########
 # MODULES
 module purge
-module load minimap2/2.20-GCC-9.2.0 
+module load minimap2/2.24-GCC-11.3.0
 #########
 
-INDIR=/nesi/nobackup/ga03048/assemblies/hifiasm/02-purge-dups/
-QUERY=01-weta-hic-hifiasm.a_ctg.hap-merged
-REFDIR=/nesi/nobackup/ga03048/assemblies/hifiasm/02-purge-dups/
-REF=01-weta-hic-hifiasm-p_ctg-purged
+INDIR=/nesi/nobackup/ga03048/weta/assemblies/hifiasm/03-scaffolding/2023-OmniC/02-scaffolding/omnic-r2/yahs/
+QUERY=out_JBAT-2023-12-12-curated-AG1149-mapped.PT-yahs_scaffolds_final
+REFDIR=/nesi/nobackup/ga03048/weta/reference-genomes/
+REF=GCA_946902985.2_iqMecThal1.2_genomic
 OUTDIR=/nesi/nobackup/ga03048/assemblies/hifiasm/04-alignment/
 
 export TMPDIR=/nesi/nobackup/ga03048/tmp_${SLURM_JOB_ID}
 mkdir -p $TMPDIR
-export TMPDIR
+export TMPDIR=$TMPDIR
 
 cd $OUTDIR
 
@@ -27,10 +27,15 @@ echo "Aligning $QUERY against $REF reference genome"
 # To index reference genome the first time you run this - can then just call the index ref.mmi following this
 if [ ! -e ${REFDIR}${REF}.mmi ]; then
 	echo "Index file of reference does not exist: creating index"
-	minimap2 -t $SLURM_CPUS_PER_TASK -d ${REFDIR}${REF}.mmi ${REFDIR}${REF}.fa
+	minimap2 -t $SLURM_CPUS_PER_TASK -d ${REFDIR}${REF}.mmi ${REFDIR}${REF}.fna
 fi
 echo "Aligning $QUERY to $REF"
-minimap2 -ax asm5 -t 32 ${REFDIR}${REF}.mmi ${INDIR}${QUERY}.fa > pri-pur-v-alt-hap-merged.paf
+minimap2 -ax asm5 -t 32 ${REFDIR}${REF}.mmi ${INDIR}${QUERY}.fa > GCA_946902985.2-curated-AG1149-mapped.PT-yahs_scaffolds.paf
 
 echo "Collecting stats"
-$HOME/bin/k8 /nesi/project/ga03186/HiFi-scripts/paftools.js stat pri-pur-v-alt-hap-merged.paf > pri-pur-v-alt-hap-merged-stat.out
+paftools.js stat GCA_946902985.2-curated-AG1149-mapped.PT-yahs_scaffolds.paf > GCA_946902985.2-curated-AG1149-mapped.PT-yahs_scaffolds-stats.out
+
+ml purge && ml miniasm/0.3-20191007-GCC-11.3.0
+
+# -m min match length, -w image width
+minidot -m 5000 -w 1000 GCA_946902985.2-curated-AG1149-mapped.PT-yahs_scaffolds.paf
